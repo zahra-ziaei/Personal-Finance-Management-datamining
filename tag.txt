@@ -18,11 +18,11 @@ order by count desc
 
 
 
-#as the same as above but specifically show the results for tag include) word ????? (if we want exactly matches we should say: where tag.tag = '?????')
+#as the same as above but specifically show the results for tag include) word zahra (if we want exactly matches we should say: where tag.tag = 'zahra')
 select count(*) c,  tag.tag tag, max(t.amount) , min(t.amount)
 from transaction_tags tt
 left outer join transaction t on t.id = tt.transactions_id
 left outer join tag on tag.id = tt.tags_id
-where tag.tag like '%?????%'
+where tag.tag like '%zahra%'
 group by tag.tag
 order by c desc
