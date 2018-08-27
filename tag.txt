@@ -1,0 +1,28 @@
+#determine how many each tag is labeled by all the users
+select count(*) c,  tag.tag tag
+from transaction_tags tt
+left outer join transaction t on t.id = tt.transactions_id
+left outer join tag on tag.id = tt.tags_id
+group by tag.tag
+order by c desc
+
+
+
+#determine how many each tag is labeled by all the users and calculate the max,min and average 
+select count(*) count,  tag.tag tag, max(t.amount) , min(t.amount) , round(AVG(t.amount)) average
+from transaction_tags tt
+left outer join transaction t on t.id = tt.transactions_id
+left outer join tag on tag.id = tt.tags_id
+group by tag.tag
+order by count desc
+
+
+
+#as the same as above but specifically show the results for tag include) word ????? (if we want exactly matches we should say: where tag.tag = '?????')
+select count(*) c,  tag.tag tag, max(t.amount) , min(t.amount)
+from transaction_tags tt
+left outer join transaction t on t.id = tt.transactions_id
+left outer join tag on tag.id = tt.tags_id
+where tag.tag like '%?????%'
+group by tag.tag
+order by c desc
