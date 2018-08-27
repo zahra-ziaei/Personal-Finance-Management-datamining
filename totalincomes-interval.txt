@@ -1,0 +1,33 @@
+# show which people have total income between … and … during time … and …
+select tt.amount  , u.* 
+from hadaf_user u
+inner join(
+select sum(t.amount) amount  , r.user_id 
+from transaction t
+left outer join  resource r on t.resource_id = r.id
+where t.amount>0 
+and t.transaction_time >= '2018-07-11 00:00:00' 
+and  t.transaction_time < '2018-08-11 00:00:00'
+group by r.user_id
+)as tt on tt.user_id = u.id  
+where
+tt.amount> 0 and tt.amount < 100000000
+order by  tt.amount
+
+
+
+#show the number of people have total income between … and … during time … and …
+
+select count(*)
+from hadaf_user u
+inner join(
+select sum(t.amount) amount  , r.user_id 
+from transaction t
+left outer join  resource r on t.resource_id = r.id
+where t.amount>0 
+and t.transaction_time >= '2018-07-11 00:00:00' 
+and  t.transaction_time < '2018-08-11 00:00:00'
+group by r.user_id
+)as tt on tt.user_id = u.id  
+where
+tt.amount> 0 and tt.amount < 100000000
