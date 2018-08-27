@@ -17,3 +17,5 @@ order by  r.user_id, amount
  
 )
 SELECT * FROM MyRowSet WHERE RowNum <= 4
+
+#shows the 4 bigest outcome category of each user in time duration ... and ...
