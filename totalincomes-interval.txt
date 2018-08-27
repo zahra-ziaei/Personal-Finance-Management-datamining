@@ -1,4 +1,4 @@
-# show which people have total income between … and … during time … and …
+# show which people have total income between â€¦ and â€¦ during time â€¦ and â€¦
 select tt.amount  , u.* 
 from hadaf_user u
 inner join(
@@ -8,6 +8,7 @@ left outer join  resource r on t.resource_id = r.id
 where t.amount>0 
 and t.transaction_time >= '2018-07-11 00:00:00' 
 and  t.transaction_time < '2018-08-11 00:00:00'
+and t.id !='86392d0f-b91f-4ecf-9892-2604936702da'
 group by r.user_id
 )as tt on tt.user_id = u.id  
 where
@@ -16,7 +17,7 @@ order by  tt.amount
 
 
 
-#show the number of people have total income between … and … during time … and …
+#show the number of people have total income between â€¦ and â€¦ during time â€¦ and â€¦
 
 select count(*)
 from hadaf_user u
@@ -27,6 +28,7 @@ left outer join  resource r on t.resource_id = r.id
 where t.amount>0 
 and t.transaction_time >= '2018-07-11 00:00:00' 
 and  t.transaction_time < '2018-08-11 00:00:00'
+and t.id !='86392d0f-b91f-4ecf-9892-2604936702da'
 group by r.user_id
 )as tt on tt.user_id = u.id  
 where
