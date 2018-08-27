@@ -1,0 +1,5 @@
+select count(terminal_no),count (distinct terminal_no), count(category_id),count(distinct category_id)from terminal
+
+
+#respectively determine the number of total pos have transaction on them, the number of unique pos, 
+the number of pos whose category is defined and the number of all the unique category labelded to pos
