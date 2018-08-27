@@ -1,0 +1,19 @@
+WITH MyRowSet
+AS
+(
+
+select tt.*  ,ROW_NUMBER() OVER (PARTITION BY tt.user_id ORDER BY tt.user_id, tt.amount ) AS RowNum , u.*
+from hadaf_user u
+inner join (
+select sum(t.amount) amount , c.name , r.user_id 
+from transaction t
+left outer join  resource r on t.resource_id = r.id
+left outer join category c on c.id = t.category_id
+where t.amount<0 and t.transaction_time >= '2018-07-23 00:00:00' and  t.transaction_time < '2018-08-11 00:00:00'
+--and user_id = '11a0b63c-5cd6-4308-9330-c2a81f3243fc'
+group by c.name , r.user_id
+order by  r.user_id, amount 
+ )as tt on tt.user_id = u.id
+ 
+)
+SELECT * FROM MyRowSet WHERE RowNum <= 4
