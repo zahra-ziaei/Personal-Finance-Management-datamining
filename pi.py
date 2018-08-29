@@ -1,4 +1,5 @@
 # Apriori
+#associate rule
 
 
 import numpy as np
