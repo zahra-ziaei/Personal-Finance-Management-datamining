@@ -1,0 +1,25 @@
+#belowing code, union transctions of all the similar person and determine  pecent of toatl amount transaction in each category
+
+select count(a.amount), sum(a.amount), (sum(a.amount) / (SUM(sum(a.amount)) OVER() )) * 100 percent, a.category
+from(
+select tt.amount  ,tt.category,  date_part('year',age(u.birth_date)) user_age ,u.* 
+from hadaf_user u
+inner join(
+select sum(t.amount) amount  , r.user_id , c.name category
+  from transaction t
+  left outer join category c on c.id = t.category_id
+  left outer join  resource r on t.resource_id = r.id
+where t.amount>0 
+and  t.transaction_time >= '2018-07-11 00:00:00' 
+and  t.transaction_time < '2018-08-11 00:00:00'
+group by c.name , r.user_id
+
+)as tt on tt.user_id = u.id
+where 
+tt.amount> 0 and tt.amount < 100000000
+and u.gender='Female'
+--and  date_part('year',age(u.birth_date)) > 30
+
+order by u.id
+) a
+group by a.category
