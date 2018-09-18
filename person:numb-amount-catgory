@@ -1,0 +1,11 @@
+# present the toatal number and amount of transaction of each customer in specific category
+
+select  sum(t.amount) amount ,count(*), c.name category , r.user_id user_id
+from transaction t
+left outer join category c on c.id = t.category_id
+left outer join  resource r on t.resource_id = r.id
+where c.name = 'hygiene'
+and  t.transaction_time >= '2018-08-15 00:00:00' 
+and  t.transaction_time < '2018-09-18 00:00:00'
+group by c.name , r.user_id
+order by count desc
