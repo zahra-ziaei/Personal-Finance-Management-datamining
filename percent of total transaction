@@ -1,0 +1,8 @@
+#percent of total number of transaction in each category
+select  count(*), (count(*) / (SUM(count(*)) OVER() )) * 100 percent ,c.name category 
+from transaction t
+left outer join category c on c.id = t.category_id
+where  t.transaction_time >= '2018-07-11 00:00:00' 
+and  t.transaction_time < '2018-08-11 00:00:00'
+group by c.name
+order by percent desc
