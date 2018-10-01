@@ -1,0 +1,9 @@
+#determine the numnber,maxm, min, average budget for each category
+SELECT round(avg(b.amount)) AS "avg", 
+min(b.amount) AS "min", 
+max(b.amount) AS "max", 
+count(*) AS "count", c.name
+FROM budget b
+left outer join category c on c.id = b.category_id
+GROUP BY b.category_id ,  c.name
+ORDER BY count desc
