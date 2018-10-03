@@ -22,3 +22,12 @@ FROM "public"."resource"
 left outer join banks b on b.id=resource.bank_id 
 where resource.creation_time>'2018-9-23 00:00:00.627'
 GROUP BY b.bank
+
+
+#show the total resource and total bakn for each user
+SELECT count(*)totalresource ,count(distinct b.bank) uniqbank, resource.user_id
+FROM "public"."resource"
+left outer join banks b on b.id=resource.bank_id 
+where resource.creation_time>'2018-9-23 00:00:00.627'
+GROUP BY resource.user_id
+order by totalresource desc
