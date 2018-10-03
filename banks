@@ -1,0 +1,21 @@
+#show the total number of resource for each bank
+SELECT count(*) AS "count", b.bank 
+FROM "public"."resource"
+left outer join banks b on b.id=resource.bank_id 
+GROUP BY b.bank
+order by count desc
+
+
+#show the total number of resource for each bank for each user
+SELECT count(*) AS "count", b.bank, user_id 
+FROM "public"."resource"
+left outer join banks b on b.id=resource.bank_id 
+GROUP BY b.bank, resource.user_id
+order by  count desc,b.bank
+
+
+#show the total number of resource, and total of unique -ser resource for each bank
+SELECT count(*)total ,count(distinct resource.user_id) uniq, b.bank 
+FROM "public"."resource"
+left outer join banks b on b.id=resource.bank_id 
+GROUP BY b.bank
