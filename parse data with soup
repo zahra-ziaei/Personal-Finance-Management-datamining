@@ -1,0 +1,186 @@
+UPDATE assets.currency_unit SET fee = fee / 10
+
+
+import requests
+from bs4 import BeautifulSoup
+import datetime
+import time
+import cfscrape
+filename=str(datetime.datetime.now().strftime("%m-%d-%H"))
+print("arz price")
+file=open("%s.txt"%filename,"a")
+for j in range(0,1):
+    print("step %s" %j)
+
+    scraper=cfscrape.create_scraper()
+    page=scraper.get("https://www.iranjib.ir/showgroup/23/realtime_price/")
+    soup=BeautifulSoup(page.content, 'html.parser')
+   """ dollarus=soup.find(id="f_103_68_pr")
+    print("دلار آمريکا" , dollarus.get_text())
+    euro=soup.find(id="f_105_68_pr")
+    print("يورو" , euro.get_text())
+    pound=soup.find(id="f_209_68_pr")
+    print("پوند" , pound.get_text())
+    dollarcan=soup.find(id="f_210_68_pr")
+    print("دلار کانادا" , dollarcan.get_text())
+    lir=soup.find(id="f_218_68_pr")
+    print("لير " , lir.get_text())
+    derham=soup.find(id="f_217_68_pr")
+    print("درهم" , derham.get_text())
+    dollarau=soup.find(id="f_211_68_pr")
+    print("دلار استراليا" , dollarau.get_text())
+    frank=soup.find(id="f_212_68_pr")
+    print("فرانک سوييس" , frank.get_text())         
+    korons=soup.find(id="f_214_68_pr")
+    print("کرون سوئد" , korons.get_text())
+    korond=soup.find(id="f_215_68_pr")
+    print(" کرون دانمارک" , korond.get_text()  )   
+    koronn=soup.find(id="f_216_68_pr")
+    print("کرون نروژ" , koronn.get_text())
+    uan=soup.find(id="f_220_68_pr")
+    print("يوان چين" , uan.get_text())         
+    bot=soup.find(id="f_221_68_pr")
+    print("بات تايلند" , bot.get_text())             
+    ringet=soup.find(id="f_219_68_pr")
+    print("رينگت مالزي" , ringet.get_text() )      
+    rial=soup.find(id="f_223_68_pr")
+    print("ريال عربستان" , rial.get_text())
+    rialg=soup.find(id="f_232_68_pr")
+    print("ريال ثطر" , rialg.get_text())
+    rialo=soup.find(id="f_231_68_pr")
+    print("ريال عمان" , rialo.get_text())
+    sady=soup.find(id="f_213_68_pr")
+    print("صدين ژاپن" , sady.get_text())
+    rup=soup.find(id="f_222_68_pr")
+    print("روپيه" , rup.get_text())
+    rubl=soup.find(id="f_225_68_pr")
+    print("روبل روسيه" , rubl.get_text())
+    dinara=soup.find(id="f_224_68_pr")
+    print("دينار عراق" , dinara.get_text())
+    dinark=soup.find(id="f_229_68_pr")
+    print("دينار کويت" , dinark.get_text())
+    dinarb=soup.find(id="f_230_68_pr")
+    print("دينار بحرين" , dinarb.get_text())
+    manat=soup.find(id="f_226_68_pr")
+    print("منات آذربايجان" , manat.get_text())
+    deram=soup.find(id="f_227_68_pr")
+    print("درام ارمنستان" , deram.get_text())
+    lari=soup.find(id="f_228_68_pr")
+    print("لاري گرجستان" , lari.get_text())
+   
+    afgh=soup.find(id="f_238_68_pr")
+    print("افغاني" , afgh.get_text())
+
+      
+    lirs=soup.find(id="f_233_68_pr")
+    print("لير سوريه" , lirs.get_text())"""
+
+
+    
+    tala18=soup.find(id="f_85_63_pr")
+    print("هر گرم طلاي 18 عيار" , tala18.get_text())
+    tala24=soup.find(id="f_127_63_pr")
+    print("هر گرم طلاي 24 عيار" , tala24.get_text())
+
+    sekeghadim=soup.find(id="f_88_63_pr")
+    print("سکه طرح قديم " , sekeghadim.get_text())
+    sekejadid=soup.find(id="f_87_63_pr")
+    print("سکه طرح جديد " , sekejadid.get_text())
+    nimseke=soup.find(id="f_89_63_pr")
+    print("نيم سکه " , nimseke.get_text())
+    robseke=soup.find(id="f_90_63_pr")
+    print("ربع سکه " , robseke.get_text())
+    sekegeram=soup.find(id="f_92_63_pr")
+    print("سکه يک گرمي " , sekegeram.get_text())
+
+
+  """  file.write("arz %s"%dollarus.get_text())
+    file.write(",")
+    file.write(euro.get_text())
+    file.write(",")
+    file.write(pound.get_text())
+    file.write(",")
+    file.write(dollarcan.get_text())
+    file.write(",")
+    file.write(lir.get_text())
+    file.write(",")
+    file.write(derham.get_text())
+    file.write(",")
+    file.write(dollarau.get_text())
+    file.write(",")
+    file.write(frank.get_text())
+    file.write(",")
+    file.write(korons.get_text())
+    file.write(",")
+    file.write(korond.get_text())
+    file.write(",")
+    file.write(koronn.get_text())
+    file.write(",")
+    file.write(uan.get_text())
+    file.write(",")
+    file.write(bot.get_text())
+    file.write(",")
+    file.write(ringet.get_text())
+    file.write(",")
+    file.write(rial.get_text())
+    file.write(",")
+    file.write(rialg.get_text())
+    file.write(",")
+    file.write(rialo.get_text())
+    file.write(",")
+    file.write(sady.get_text())
+    file.write(",")
+    file.write(rup.get_text())
+    file.write(",")
+    file.write(rubl.get_text())
+    file.write(",")
+    file.write(dinara.get_text())
+    file.write(",")
+    file.write(dinark.get_text())
+    file.write(",")
+    file.write(dinarb.get_text())
+
+   
+    file.write(",")
+    file.write(manat.get_text())
+
+    file.write(",")
+    file.write(deram.get_text())
+
+    file.write(",")
+    file.write(lari.get_text())
+
+
+    file.write(",")
+    file.write(afgh.get_text())
+
+    file.write(",")
+    file.write(lirs.get_text())
+
+          
+    file.write("\n")"""
+
+    
+    file.write("tala %s"%tala18.get_text())
+    file.write(",")
+    file.write(tala24.get_text())
+    file.write(",")
+    file.write(sekeghadim.get_text())
+    file.write(",")
+    file.write(sekejadid.get_text())
+    file.write(",")
+    file.write(nimseke.get_text())
+    file.write(",")
+    file.write(robseke.get_text())
+    file.write(",")
+    file.write(sekegeram.get_text())
+    file.write("\n")
+    file.write("\n")
+    file.write("\n")
+    file.write("\n")
+
+    
+    #time.sleep(360)
+
+
+file.close()
