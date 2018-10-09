@@ -1,0 +1,28 @@
+select count(*)  tedad , c.name , sum(t.amount)  , (sum(t.amount) / (SUM(sum(t.amount)) OVER() )) * 100 percent
+from transaction t
+left outer join  resource r on t.resource_id = r.id
+left outer join category c on c.id = t.category_id
+where 
+r.user_id in 
+(
+select r.user_id
+from transaction t1
+left outer join  resource r on t1.resource_id = r.id
+left outer join hadaf_user u on r.user_id = u.id
+where 
+   t1.transaction_time >= '2018-07-11 00:00:00' 
+  and  t1.transaction_time < '2018-08-11 00:00:00'
+  --and u.gender='Female'
+    and  date_part('year',age(u.birth_date)) > 30
+group by r.user_id , sign(t1.amount) 
+having sum(t1.amount)>0 and sum(t1.amount)<100000000
+order by r.user_id 
+)
+and t.transaction_time >= '2018-07-18 00:00:00' 
+group by c.name , sign(t.amount) 
+  having sign(t.amount) = -1
+order by percent desc
+
+
+% the first two time for calculating income
+%the last time, are used for determining category of outcome
