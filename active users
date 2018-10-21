@@ -1,0 +1,6 @@
+select u.*
+from hadaf_user u
+where u.id  in (select s2.user_id
+                                   from hadaf_session s2
+                                   where s2.last_request_date > '2018-10-01 13:02:16' and s2.user_id is not null and request_count>10)
+                                   order by email_address
