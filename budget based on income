@@ -1,0 +1,20 @@
+SELECT round(avg(b.amount)) AS "avg", 
+min(b.amount) AS "min", 
+max(b.amount) AS "max", 
+count(*) AS "count", c.name
+FROM budget b
+left outer join category c on c.id = b.category_id
+where b.user_id in (
+select r.user_id
+  from transaction t
+  left outer join category c on c.id = t.category_id
+  left outer join  resource r on t.resource_id = r.id
+where 
+  t.transaction_time >= '2018-07-11 00:00:00' 
+and  t.transaction_time < '2018-08-11 00:00:00'
+group by r.user_id , sign(t.amount)
+having sum(t.amount)>1000000000 and sum(t.amount)<2200000000
+order by r.user_id 
+  )
+GROUP BY b.category_id ,  c.name
+ORDER BY b.category_id ASC
