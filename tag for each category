@@ -1,0 +1,8 @@
+select tag, count(amount), sum(amount) sa
+from transaction_tags tt
+left outer join transaction t on t.id = tt.transactions_id
+left outer join tag on tag.id = tt.tags_id
+where category_id='e7e40e5e-88bf-4777-aa8c-1d4c6036a93d'
+"""sarmayegozari"""
+group by tag
+order by sa 
