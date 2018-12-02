@@ -1,0 +1,8 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+
+dataset = pd.read_csv('1.csv',index_col=0)
+datset2=pd.read_csv('2.csv',index_col=0)
+datse31=pd.merge(dataset,datset2,how='inner',left_index=True,right_index=True)
+datse31['darsad']=datse31['count']/datse31['tedad']
