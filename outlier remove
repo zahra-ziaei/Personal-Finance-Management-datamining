@@ -1,0 +1,17 @@
+* this code determine the accepted uper nound and lowe bound(STDDEV: yani standard deviation)
+
+SELECT (AVG(net_worth) - STDDEV_SAMP(net_worth) * 2) as lower_bound,
+           (AVG(net_worth) + STDDEV_SAMP(net_worth) * 2) as upper_bound
+    FROM building;
+
+
+* this code determine the average of data when outlier is removed
+
+WITH bounds AS (
+    SELECT (AVG(net_worth) - STDDEV_SAMP(net_worth) * 2) as lower_bound,
+           (AVG(net_worth) + STDDEV_SAMP(net_worth) * 2) as upper_bound
+    FROM building
+)
+SELECT round(AVG(net_worth)) as average
+FROM building
+WHERE net_worth BETWEEN (SELECT lower_bound FROM bounds) AND (SELECT upper_bound FROM bounds);
