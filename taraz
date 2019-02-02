@@ -1,0 +1,26 @@
+**show number of people with this taraz
+
+select count(amount)
+from(select sum(t.amount) amount  , r.user_id 
+from transaction t
+left outer join  resource r on t.resource_id = r.id
+left outer join  hadaf_user hu on r.user_id=hu.id
+where t.transaction_time >= '2018-07-02 00:00:00' 
+and  t.transaction_time < '2018-08-02 00:00:00'
+and hu.creation_time>'2018-07-02 00:00:00' 
+group by r.user_id) as tl
+where amount<0
+
+
+
+*show maximum and minimum
+select min(amount) mintaraz, max(amount) maxtaraz, avg(amount) averagetaraz
+from(select sum(t.amount) amount  , r.user_id 
+from transaction t
+left outer join  resource r on t.resource_id = r.id
+left outer join  hadaf_user hu on r.user_id=hu.id
+where t.transaction_time >= '2018-07-02 00:00:00' 
+and  t.transaction_time < '2018-08-02 00:00:00'
+and hu.creation_time>'2018-07-02 00:00:00' 
+group by r.user_id) as tl
+where amount<0
