@@ -1,0 +1,10 @@
+***mujudi hesabe man
+select sum(balance) from resource
+where is_active='true' and
+user_id='11a0b63c-5cd6-4308-9330-c2a81f3243fc' and bank_id is not null
+
+
+mujudie hesabe hame
+select user_id,  sum(balance) from resource
+where is_active='true' and bank_id is not null
+group by user_id
