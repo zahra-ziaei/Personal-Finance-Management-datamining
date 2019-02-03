@@ -4,7 +4,16 @@ where is_active='true' and
 user_id='11a0b63c-5cd6-4308-9330-c2a81f3243fc' and bank_id is not null
 
 
-mujudie hesabe hame
+***mujudie hesabe hame
 select user_id,  sum(balance) from resource
 where is_active='true' and bank_id is not null
 group by user_id
+
+
+
+** mujudi baraye adama
+select * from
+(select user_id,  sum(balance) ba from resource
+where is_active='true' and bank_id is not null
+group by user_id) as t1
+where ba>0 and ba>10000000000
